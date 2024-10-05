@@ -31,8 +31,11 @@ jobs:
         echo "DOCKER_USERNAME is ${{ secrets.DOCKER_USERNAME }}"
         echo "DOCKER_PASSWORD is set"
 
-    - name: Build and push Docker images
-      run: docker-compose up --build -d
+    - name: Build backend image
+      run: docker build -t backend-node ./backend-node
+
+    - name: Build frontend image
+      run: docker build -t frontend ./frontend
 
     - name: Run tests
-      run: docker-compose exec backend npm test
+      run: docker run --rm backend-node npm test
