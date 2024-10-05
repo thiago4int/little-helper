@@ -35,3 +35,9 @@ jobs:
 
     - name: Run tests
       run: docker-compose exec backend npm test
+
+    - name: Save state example
+      run: echo "myState=someValue" >> $GITHUB_STATE
+
+    - name: Set output example
+      run: echo "myOutput=someValue" >> $GITHUB_OUTPUT
