@@ -1,0 +1,24 @@
+version: '3'
+services:
+  backend:
+    build: ./backend-node
+    container_name: backend-node
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URL=${MONGO_URL}  # Use MongoDB Atlas connection from .env
+    volumes:
+      - ./backend-node:/usr/src/app
+    command: npm start
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: always
+    ports:
+      - "3000:80"               # Expose frontend on port 3000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/usr/src/app
