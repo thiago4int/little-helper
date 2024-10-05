@@ -27,12 +27,12 @@ jobs:
 
     - name: Verify Secrets
       run: |
-        echo "MONGO_URL is ${{ env.MONGO_URL }}"
-        echo "DOCKER_USERNAME is ${{ secrets.DOCKER_USERNAME }}"
+        echo "MONGO_URL is set"
+        echo "DOCKER_USERNAME is set"
         echo "DOCKER_PASSWORD is set"
 
-    - name: Build and push Docker images
-      run: docker-compose up --build -d
+    - name: Build Docker images
+      run: docker-compose build  # Construa as imagens Docker
 
     - name: Run tests
-      run: docker-compose exec backend npm test
+      run: docker-compose run backend npm test  # Execute os testes no contêiner backend
